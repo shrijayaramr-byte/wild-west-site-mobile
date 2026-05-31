@@ -106,8 +106,17 @@
   -webkit-text-stroke: clamp(2px, 0.6vw, 10px) #ffffff;
 }
 
+.bold-flavor-wrapper {
+  transform: translate(-40vw, -6vw) rotateX(0deg) rotateY(0deg) rotateZ(15deg) scale(0.95);
+  transform-style: preserve-3d;
+}
+
 @media (max-width: 768px) {
   .burrito-headline-centered {
-    -webkit-text-stroke: 5px #ffffff;
+    font-size: clamp(3rem, 20vw, 15rem);
+    -webkit-text-stroke: 3px #ffffff;
+  }
+  .bold-flavor-wrapper {
+    transform: translate(-25vw, -25vw) rotateZ(15deg) scale(1.1) !important;
   }
 }

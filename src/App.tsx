@@ -11,10 +11,12 @@ const Navbar = () => {
   const [offset, setOffset] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
+      if (isMenuOpen) return;
       const currentScrollY = window.scrollY;
       const navHeight = navRef.current?.offsetHeight || 80;
       const diff = lastScrollY - currentScrollY;
@@ -23,7 +25,6 @@ const Navbar = () => {
         setOffset(0);
         setIsScrollingUp(false);
       } else if (diff < 0) {
-        // Scrolling DOWN (Fingers Up): Move UP at 1:1 speed
         setIsScrollingUp(false);
         setOffset((prev) => {
           let newOffset = prev + diff;
@@ -31,7 +32,6 @@ const Navbar = () => {
           return newOffset;
         });
       } else if (diff > 0) {
-        // Scrolling UP: Reveal slowly
         setIsScrollingUp(true);
         setOffset(0);
       }
@@ -41,7 +41,7 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, isMenuOpen]);
 
   const handleStart = () => {
     window.location.reload();
@@ -50,42 +50,68 @@ const Navbar = () => {
   return (
     <nav 
       ref={navRef}
-      className={`fixed top-0 left-0 w-full z-50 py-4 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
+      className={`fixed top-0 left-0 w-full z-50 py-3 md:py-6 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
       style={{ transform: `translateY(${offset}px)` }}
     >
-      <div className="w-full px-4 flex items-center justify-between relative">
+      <div className="w-full px-3 md:px-12 flex items-center justify-between relative">
 
-        {/* Logo Container - Absolute flush to top left */}
-        <div className="relative h-20 w-48 cursor-pointer" onClick={handleStart}>
-          <img 
-            src="wildlogo.png" 
-            alt="Wild West Logo" 
-            className="absolute -top-20 -left-12 h-72 w-auto max-w-none object-contain pointer-events-none"
-          />
+        {/* Logos Container - Left side, stacked for mobile, side-by-side for desktop */}
+        <div className="flex items-center gap-0 md:gap-6 z-50" onClick={handleStart}>
+          <div className="relative h-12 md:h-24 w-24 md:w-48 cursor-pointer">
+            <img 
+              src="wildlogo.png" 
+              alt="Wild West Logo" 
+              className="absolute -top-12 md:-top-20 -left-6 md:-left-12 h-44 md:h-80 w-auto max-w-none object-contain pointer-events-none"
+            />
+          </div>
+          <div className="cursor-pointer ml-4 md:ml-0">
+            <img 
+              src="logotrans.png" 
+              alt="Center Logo" 
+              className="h-10 md:h-24 w-auto object-contain"
+            />
+          </div>
         </div>
 
-        {/* Center: Centerpiece Logo */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer" onClick={handleStart}>
-          <img 
-            src="logotrans.png" 
-            alt="Center Logo" 
-            className="h-24 w-auto object-contain"
-          />
-        </div>
-
-        {/* Right: Action Buttons */}
-        <div className="flex items-center gap-6 z-10">
-          <button className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[1.5vw] max-md:text-[4.5vw] uppercase tracking-wide text-beige bg-red px-[1.8vw] py-[.6vw] max-md:px-[5.5vw] max-md:py-[1.8vw] group rounded-full hover:bg-black shadow-lg">
+        {/* Right: Three Action Buttons (Burrito, Rice Bowl, Menu) */}
+        <div className="flex items-center gap-1 md:gap-4 z-50">
+          <button className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[3.2vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[2.5vw] py-[1.2vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg">
             <span className="relative z-10">Burrito</span>
           </button>
-          <button className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[1.5vw] max-md:text-[4.5vw] uppercase tracking-wide text-beige bg-red px-[1.8vw] py-[.6vw] max-md:px-[5.5vw] max-md:py-[1.8vw] group rounded-full hover:bg-black shadow-lg">
+          <button className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[3.2vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[2.5vw] py-[1.2vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg">
             <span className="relative z-10">Rice Bowl</span>
           </button>
-          <button className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[1.5vw] max-md:text-[4.5vw] uppercase tracking-wide text-beige bg-red px-[1.8vw] py-[.6vw] max-md:px-[5.5vw] max-md:py-[1.8vw] group rounded-full hover:bg-black shadow-lg">
-            <span className="relative z-10">Menu</span>
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[3.2vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[2.5vw] py-[1.2vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg"
+          >
+            <div className="flex items-center gap-1">
+               <span className="mr-1">Menu</span>
+               <div className="flex flex-col gap-0.5 md:gap-1 items-center justify-center">
+                  {isMenuOpen ? (
+                    <span className="leading-none">X</span>
+                  ) : (
+                    <>
+                      <div className="w-2.5 md:w-5 h-0.5 bg-beige"></div>
+                      <div className="w-2.5 md:w-5 h-0.5 bg-beige"></div>
+                      <div className="w-2.5 md:w-5 h-0.5 bg-beige"></div>
+                    </>
+                  )}
+               </div>
+            </div>
           </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-red z-40 flex flex-col items-center justify-center gap-8 pt-20">
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Burrito</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Rice Bowl</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Manifesto</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Origins</button>
+        </div>
+      )}
     </nav>
   );
 };
@@ -174,20 +200,17 @@ const Hero = () => {
       <div className="w-full max-w-[99vw] flex flex-col items-center text-center">
         
         {/* Layered Content Container - Moved UP as a whole */}
-        <div className="relative w-full h-[80vh] flex items-center justify-center mb-[20vw] -translate-y-[15vh]" style={{ perspective: '1000px' }}>
+        <div className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center mb-[40vw] md:mb-[20vw] -translate-y-[10vh] md:-translate-y-[15vh]" style={{ perspective: '1000px' }}>
           
           {/* BOLD FLAVOR (Permanent Styles) */}
           <div 
-            className="absolute left-1/2 top-1/2 z-50 pointer-events-none"
+            className="absolute left-1/2 top-1/2 z-50 pointer-events-none bold-flavor-wrapper"
             style={{ 
-              transform: 'translate(-40vw, -6vw) rotateX(0deg) rotateY(0deg) rotateZ(15deg) scale(0.95)',
               letterSpacing: '0.1vw',
-              transformStyle: 'preserve-3d'
             }}
           >
             <h2 
               className="hero-anim bold-flavor-hero text-center whitespace-pre-line"
-              style={{ fontSize: '3.4vw' }}
             >
               BOLD{"\n"}FLAVOR
             </h2>
@@ -199,19 +222,19 @@ const Hero = () => {
           </div>
 
           {/* Bowl Positioning Wrapper (Middle Layer - behind Tempt) */}
-          <div className="hero-anim absolute w-full max-w-4xl flex items-center justify-center z-20 pointer-events-none translate-y-[15vw]">
+          <div className="hero-anim absolute w-full max-w-4xl flex items-center justify-center z-20 pointer-events-none translate-y-[25vw] md:translate-y-[15vw]">
             {/* Bowl Animation Wrapper (Handles the floating effect) */}
-            <div ref={bowlRef} className="w-full flex items-center justify-center scale-[1.5]">
+            <div ref={bowlRef} className="w-full flex items-center justify-center scale-[1.2] md:scale-[1.5]">
                <BowlAnimation />
             </div>
           </div>
 
           {/* Tempt Image (Top Layer - sitting in front of bowl bottom) */}
-          <div className="hero-anim absolute w-full flex justify-center z-30 pointer-events-none translate-y-[35vw]">
+          <div className="hero-anim absolute w-full flex justify-center z-30 pointer-events-none translate-y-[55vw] md:translate-y-[35vw]">
             <img 
               src="temptlogo.png" 
               alt="Tempt" 
-              className="w-[90vw] max-w-[1200px] h-auto object-contain"
+              className="w-[95vw] md:w-[90vw] max-w-[1200px] h-auto object-contain"
             />
           </div>
 

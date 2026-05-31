@@ -39,12 +39,12 @@ const FinalPeel: React.FC = () => {
   return (
     <div className="relative w-full h-0 z-50 pointer-events-none">
       <div 
-        className="sticker-wrapper absolute right-10 md:right-20 -top-[200px]" 
+        className="sticker-wrapper absolute right-4 md:right-20 -top-[150px] md:-top-[200px]" 
         ref={triggerRef} 
         style={{
           position: 'absolute',
-          width: '400px',
-          height: '400px',
+          width: 'clamp(200px, 40vw, 400px)',
+          height: 'clamp(200px, 40vw, 400px)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

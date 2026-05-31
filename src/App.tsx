@@ -53,64 +53,27 @@ const Navbar = () => {
       className={`fixed top-0 left-0 w-full z-50 py-3 md:py-6 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
       style={{ transform: `translateY(${offset}px)` }}
     >
-      <div className="w-full px-3 md:px-12 flex items-center justify-between relative h-16 md:h-24">
+      <div className="w-full px-3 md:px-12 flex items-center justify-end relative h-16 md:h-24 gap-4 md:gap-8">
 
-        {/* Left: Wild West Script Logo */}
-        <div className="relative h-full w-24 md:w-48 cursor-pointer z-50" onClick={handleStart}>
-          <img 
-            src="wildlogo.png" 
-            alt="Wild West Logo" 
-            className="absolute -top-10 md:-top-20 -left-6 md:-left-12 h-40 md:h-80 w-auto max-w-none object-contain pointer-events-none"
-          />
-        </div>
-
-        {/* Center: Icon Logo */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-40" onClick={handleStart}>
-          <img 
-            src="logotrans.png" 
-            alt="Center Logo" 
-            className="h-10 md:h-24 w-auto object-contain"
-          />
-        </div>
-
-        {/* Right: Single Consolidated Menu Button */}
-        <div className="flex items-center z-50">
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[4vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[4vw] py-[1.5vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg"
-          >
-            <div className="flex items-center gap-2">
-               <span className="mr-1">{isMenuOpen ? 'Close' : 'Menu'}</span>
-               <div className="flex flex-col gap-0.5 md:gap-1 items-center justify-center">
-                  {isMenuOpen ? (
-                    <span className="leading-none text-[5vw] md:text-[1.5vw]">×</span>
-                  ) : (
-                    <>
-                      <div className="w-3 md:w-5 h-0.5 bg-beige"></div>
-                      <div className="w-3 md:w-5 h-0.5 bg-beige"></div>
-                      <div className="w-3 md:w-5 h-0.5 bg-beige"></div>
-                    </>
-                  )}
-               </div>
-            </div>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu Pop-in List Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-red/95 backdrop-blur-sm z-40 flex flex-col items-center justify-center gap-6 md:gap-8 pt-10 animate-in fade-in zoom-in duration-300">
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Burrito</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Rice Bowl</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">The Menu</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Manifesto</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Origins</button>
-          
-          <div className="mt-8 md:mt-12 flex flex-col items-center">
-             <img src="wildlogo.png" alt="Wild West" className="h-32 md:h-48 w-auto object-contain opacity-50" />
+        {/* Right-aligned Logos */}
+        <div className="flex items-center gap-4 md:gap-8 cursor-pointer z-50" onClick={handleStart}>
+          <div className="relative h-12 md:h-24 w-24 md:w-48">
+            <img 
+              src="wildlogo.png" 
+              alt="Wild West Logo" 
+              className="absolute -top-12 md:-top-20 -left-6 md:-left-12 h-44 md:h-80 w-auto max-w-none object-contain pointer-events-none"
+            />
+          </div>
+          <div className="relative">
+            <img 
+              src="logotrans.png" 
+              alt="Center Logo" 
+              className="h-10 md:h-24 w-auto object-contain"
+            />
           </div>
         </div>
-      )}
+
+      </div>
     </nav>
   );
 };

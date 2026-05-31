@@ -53,21 +53,21 @@ const Navbar = () => {
     >
       <div className="w-full px-4 flex items-center justify-between relative h-20">
 
-        {/* Logo Container - Left */}
-        <div className="relative h-20 w-48 cursor-pointer z-50" onClick={handleStart}>
-          <img 
-            src="wildlogo.png" 
-            alt="Wild West Logo" 
-            className="absolute -top-20 -left-12 h-72 w-auto max-w-none object-contain pointer-events-none"
-          />
-        </div>
-
-        {/* Center: Centerpiece Logo */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-40" onClick={handleStart}>
+        {/* Left: Icon Logo */}
+        <div className="cursor-pointer z-40" onClick={handleStart}>
           <img 
             src="logotrans.png" 
             alt="Center Logo" 
             className="h-24 w-auto object-contain"
+          />
+        </div>
+
+        {/* Right: Wild West Logo */}
+        <div className="relative h-20 w-48 cursor-pointer z-50" onClick={handleStart}>
+          <img 
+            src="wildlogo.png" 
+            alt="Wild West Logo" 
+            className="absolute -top-20 -right-12 h-72 w-auto max-w-none object-contain pointer-events-none"
           />
         </div>
 

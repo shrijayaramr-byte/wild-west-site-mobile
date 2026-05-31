@@ -48,13 +48,13 @@ const Navbar = () => {
   return (
     <nav 
       ref={navRef}
-      className={`fixed top-0 left-0 w-full z-50 py-3 md:py-6 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
+      className={`fixed top-0 left-0 w-full z-50 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
       style={{ transform: `translateY(${offset}px)` }}
     >
-      <div className="w-full px-6 md:px-16 flex items-center justify-between relative h-16 md:h-24">
+      <div className="w-full px-6 md:px-20 py-4 md:py-8 flex items-center justify-between">
 
-        {/* Left: Icon Logo */}
-        <div className="cursor-pointer z-50" onClick={handleStart}>
+        {/* Left: Icon Logo - Fully contained */}
+        <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
           <img 
             src="logotrans.png" 
             alt="Logo" 
@@ -62,12 +62,12 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Right: Wild West Script Logo */}
-        <div className="relative h-12 md:h-24 w-28 md:w-56 cursor-pointer z-50 flex justify-end" onClick={handleStart}>
+        {/* Right: Wild West Text Logo - Fully contained, no offsets */}
+        <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
           <img 
             src="wildlogo.png" 
             alt="Wild West" 
-            className="absolute -top-10 md:-top-16 -right-4 md:-right-8 h-40 md:h-72 w-auto max-w-none object-contain pointer-events-none"
+            className="h-14 md:h-28 w-auto object-contain"
           />
         </div>
 

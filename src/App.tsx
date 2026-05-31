@@ -62,12 +62,12 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Right: Wild West Text Logo - Much larger matched size */}
+        {/* Right: Wild West Text Logo - Further increased size */}
         <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
           <img 
             src="wildlogo.png" 
             alt="Wild West" 
-            className="h-32 md:h-56 w-auto object-contain"
+            className="h-48 md:h-80 w-auto object-contain"
           />
         </div>
 

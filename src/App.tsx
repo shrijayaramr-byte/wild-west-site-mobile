@@ -11,12 +11,10 @@ const Navbar = () => {
   const [offset, setOffset] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isMenuOpen) return;
       const currentScrollY = window.scrollY;
       const navHeight = navRef.current?.offsetHeight || 80;
       const diff = lastScrollY - currentScrollY;
@@ -41,7 +39,7 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, isMenuOpen]);
+  }, [lastScrollY]);
 
   const handleStart = () => {
     window.location.reload();

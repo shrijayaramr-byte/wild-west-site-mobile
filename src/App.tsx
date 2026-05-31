@@ -51,9 +51,9 @@ const Navbar = () => {
       className={`fixed top-0 left-0 w-full z-50 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
       style={{ transform: `translateY(${offset}px)` }}
     >
-      <div className="w-full px-6 md:px-20 py-4 md:py-8 flex items-center justify-between">
+      <div className="w-full px-6 md:px-20 py-8 md:py-16 flex items-center justify-between">
 
-        {/* Left: Icon Logo - Kept at reduced size */}
+        {/* Left: Icon Logo - Kept small */}
         <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
           <img 
             src="logotrans.png" 
@@ -62,12 +62,12 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Right: Wild West Text Logo - Increased size */}
+        {/* Right: Wild West Text Logo - Dramatically increased size */}
         <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
           <img 
             src="wildlogo.png" 
             alt="Wild West" 
-            className="h-32 md:h-56 w-auto object-contain"
+            className="h-48 md:h-80 w-auto object-contain"
           />
         </div>
 

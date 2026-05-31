@@ -11,12 +11,10 @@ const Navbar = () => {
   const [offset, setOffset] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isMenuOpen) return;
       const currentScrollY = window.scrollY;
       const navHeight = navRef.current?.offsetHeight || 80;
       const diff = lastScrollY - currentScrollY;
@@ -41,7 +39,7 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, isMenuOpen]);
+  }, [lastScrollY]);
 
   const handleStart = () => {
     window.location.reload();
@@ -73,32 +71,7 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Right: Action Buttons */}
-        <div className="flex items-center gap-2 md:gap-6 z-50">
-          <button className="hidden md:flex font-mouse-memoirs hover:scale-105 transition-all duration-300 items-center justify-center text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[1.8vw] py-[.6vw] group rounded-full hover:bg-black shadow-lg">
-            <span className="relative z-10">Burrito</span>
-          </button>
-          <button className="hidden md:flex font-mouse-memoirs hover:scale-105 transition-all duration-300 items-center justify-center text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[1.8vw] py-[.6vw] group rounded-full hover:bg-black shadow-lg">
-            <span className="relative z-10">Rice Bowl</span>
-          </button>
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[4.5vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[5.5vw] py-[1.8vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg"
-          >
-            <span className="relative z-10">{isMenuOpen ? 'Close' : 'Menu'}</span>
-          </button>
-        </div>
       </div>
-
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-red z-40 flex flex-col items-center justify-center gap-8 pt-20">
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Burrito</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Rice Bowl</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Manifesto</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Origins</button>
-        </div>
-      )}
     </nav>
   );
 };

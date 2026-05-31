@@ -51,7 +51,7 @@ const Navbar = () => {
       className={`fixed top-0 left-0 w-full z-50 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
       style={{ transform: `translateY(${offset}px)` }}
     >
-      <div className="w-full px-6 md:px-20 py-8 md:py-16 flex items-center justify-between">
+      <div className="w-full px-6 md:px-20 py-2 md:py-4 flex items-center justify-between">
 
         {/* Left: Icon Logo - Increased to match Wild West size */}
         <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>

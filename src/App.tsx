@@ -53,21 +53,21 @@ const Navbar = () => {
     >
       <div className="w-full px-6 md:px-20 py-4 md:py-8 flex items-center justify-between relative h-16 md:h-24">
 
-        {/* Left: Icon Logo - Normal size */}
+        {/* Left: Icon Logo - Increased size */}
         <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
           <img 
             src="logotrans.png" 
             alt="Logo" 
-            className="h-10 md:h-20 w-auto object-contain"
+            className="h-16 md:h-32 w-auto object-contain"
           />
         </div>
 
-        {/* Right: Wild West Text Logo - Normal size */}
+        {/* Right: Wild West Text Logo - Increased size matched to icon */}
         <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
           <img 
             src="wildlogo.png" 
             alt="Wild West" 
-            className="h-14 md:h-28 w-auto object-contain"
+            className="h-16 md:h-32 w-auto object-contain"
           />
         </div>
 

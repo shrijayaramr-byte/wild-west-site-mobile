@@ -62,12 +62,12 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Right: Wild West Script Logo - Restored to large size */}
+        {/* Right: Wild West Script Logo - Restored to original massive size */}
         <div className="relative h-12 md:h-24 w-32 md:w-64 cursor-pointer z-50 flex justify-end" onClick={handleStart}>
           <img 
             src="wildlogo.png" 
             alt="Wild West" 
-            className="absolute -top-12 md:-top-20 -right-8 md:-right-16 h-44 md:h-80 w-auto max-w-none object-contain pointer-events-none"
+            className="absolute -top-16 md:-top-24 -right-12 md:-right-20 h-64 md:h-96 w-auto max-w-none object-contain pointer-events-none"
           />
         </div>
 

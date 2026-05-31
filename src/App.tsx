@@ -53,27 +53,27 @@ const Navbar = () => {
       className={`fixed top-0 left-0 w-full z-50 py-3 md:py-6 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
       style={{ transform: `translateY(${offset}px)` }}
     >
-      <div className="w-full px-3 md:px-12 flex items-center justify-between relative">
+      <div className="w-full px-3 md:px-12 flex items-center justify-between relative h-16 md:h-24">
 
-        {/* Logos Container - Left side, stacked for mobile, side-by-side for desktop */}
-        <div className="flex items-center gap-0 md:gap-6 z-50" onClick={handleStart}>
-          <div className="relative h-12 md:h-24 w-24 md:w-48 cursor-pointer">
-            <img 
-              src="wildlogo.png" 
-              alt="Wild West Logo" 
-              className="absolute -top-12 md:-top-20 -left-6 md:-left-12 h-44 md:h-80 w-auto max-w-none object-contain pointer-events-none"
-            />
-          </div>
-          <div className="cursor-pointer ml-4 md:ml-0">
-            <img 
-              src="logotrans.png" 
-              alt="Center Logo" 
-              className="h-10 md:h-24 w-auto object-contain"
-            />
-          </div>
+        {/* Left: Wild West Script Logo */}
+        <div className="relative h-full w-24 md:w-48 cursor-pointer z-50" onClick={handleStart}>
+          <img 
+            src="wildlogo.png" 
+            alt="Wild West Logo" 
+            className="absolute -top-10 md:-top-20 -left-6 md:-left-12 h-40 md:h-80 w-auto max-w-none object-contain pointer-events-none"
+          />
         </div>
 
-        {/* Right: Three Action Buttons (Burrito, Rice Bowl, Menu) */}
+        {/* Center: Icon Logo */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-40" onClick={handleStart}>
+          <img 
+            src="logotrans.png" 
+            alt="Center Logo" 
+            className="h-10 md:h-24 w-auto object-contain"
+          />
+        </div>
+
+        {/* Right: Three Action Buttons */}
         <div className="flex items-center gap-1 md:gap-4 z-50">
           <button className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[3.2vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[2.5vw] py-[1.2vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg">
             <span className="relative z-10">Burrito</span>

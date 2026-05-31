@@ -73,28 +73,22 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Right: Three Action Buttons */}
-        <div className="flex items-center gap-1 md:gap-4 z-50">
-          <button className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[3.2vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[2.5vw] py-[1.2vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg">
-            <span className="relative z-10">Burrito</span>
-          </button>
-          <button className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[3.2vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[2.5vw] py-[1.2vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg">
-            <span className="relative z-10">Rice Bowl</span>
-          </button>
+        {/* Right: Single Consolidated Menu Button */}
+        <div className="flex items-center z-50">
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[3.2vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[2.5vw] py-[1.2vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg"
+            className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[4vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[4vw] py-[1.5vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg"
           >
-            <div className="flex items-center gap-1">
-               <span className="mr-1">Menu</span>
+            <div className="flex items-center gap-2">
+               <span className="mr-1">{isMenuOpen ? 'Close' : 'Menu'}</span>
                <div className="flex flex-col gap-0.5 md:gap-1 items-center justify-center">
                   {isMenuOpen ? (
-                    <span className="leading-none">X</span>
+                    <span className="leading-none text-[5vw] md:text-[1.5vw]">×</span>
                   ) : (
                     <>
-                      <div className="w-2.5 md:w-5 h-0.5 bg-beige"></div>
-                      <div className="w-2.5 md:w-5 h-0.5 bg-beige"></div>
-                      <div className="w-2.5 md:w-5 h-0.5 bg-beige"></div>
+                      <div className="w-3 md:w-5 h-0.5 bg-beige"></div>
+                      <div className="w-3 md:w-5 h-0.5 bg-beige"></div>
+                      <div className="w-3 md:w-5 h-0.5 bg-beige"></div>
                     </>
                   )}
                </div>
@@ -103,13 +97,18 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Pop-in List Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-red z-40 flex flex-col items-center justify-center gap-8 pt-20">
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Burrito</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Rice Bowl</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Manifesto</button>
-          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Origins</button>
+        <div className="fixed inset-0 bg-red/95 backdrop-blur-sm z-40 flex flex-col items-center justify-center gap-6 md:gap-8 pt-10 animate-in fade-in zoom-in duration-300">
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Burrito</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Rice Bowl</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">The Menu</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Manifesto</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-5xl md:text-7xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Origins</button>
+          
+          <div className="mt-8 md:mt-12 flex flex-col items-center">
+             <img src="wildlogo.png" alt="Wild West" className="h-32 md:h-48 w-auto object-contain opacity-50" />
+          </div>
         </div>
       )}
     </nav>

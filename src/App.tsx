@@ -51,24 +51,24 @@ const Navbar = () => {
       className={`fixed top-0 left-0 w-full z-50 py-3 md:py-6 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
       style={{ transform: `translateY(${offset}px)` }}
     >
-      <div className="w-full px-3 md:px-12 flex items-center justify-end relative h-16 md:h-24 gap-4 md:gap-8">
+      <div className="w-full px-6 md:px-16 flex items-center justify-between relative h-16 md:h-24">
 
-        {/* Right-aligned Logos */}
-        <div className="flex items-center gap-4 md:gap-8 cursor-pointer z-50" onClick={handleStart}>
-          <div className="relative h-12 md:h-24 w-24 md:w-48">
-            <img 
-              src="wildlogo.png" 
-              alt="Wild West Logo" 
-              className="absolute -top-12 md:-top-20 -left-6 md:-left-12 h-44 md:h-80 w-auto max-w-none object-contain pointer-events-none"
-            />
-          </div>
-          <div className="relative">
-            <img 
-              src="logotrans.png" 
-              alt="Center Logo" 
-              className="h-10 md:h-24 w-auto object-contain"
-            />
-          </div>
+        {/* Left: Icon Logo */}
+        <div className="cursor-pointer z-50" onClick={handleStart}>
+          <img 
+            src="logotrans.png" 
+            alt="Logo" 
+            className="h-10 md:h-20 w-auto object-contain"
+          />
+        </div>
+
+        {/* Right: Wild West Script Logo */}
+        <div className="relative h-12 md:h-24 w-28 md:w-56 cursor-pointer z-50 flex justify-end" onClick={handleStart}>
+          <img 
+            src="wildlogo.png" 
+            alt="Wild West" 
+            className="absolute -top-10 md:-top-16 -right-4 md:-right-8 h-40 md:h-72 w-auto max-w-none object-contain pointer-events-none"
+          />
         </div>
 
       </div>

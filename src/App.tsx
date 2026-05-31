@@ -53,7 +53,7 @@ const Navbar = () => {
     >
       <div className="w-full px-6 md:px-20 py-4 md:py-8 flex items-center justify-between relative h-16 md:h-24">
 
-        {/* Left: Icon Logo - Fully contained */}
+        {/* Left: Icon Logo - Normal size */}
         <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
           <img 
             src="logotrans.png" 
@@ -62,12 +62,12 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Right: Wild West Script Logo - Restored to original massive size */}
-        <div className="relative h-12 md:h-24 w-32 md:w-64 cursor-pointer z-50 flex justify-end" onClick={handleStart}>
+        {/* Right: Wild West Text Logo - Normal size */}
+        <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
           <img 
             src="wildlogo.png" 
             alt="Wild West" 
-            className="absolute -top-16 md:-top-24 -right-12 md:-right-20 h-64 md:h-96 w-auto max-w-none object-contain pointer-events-none"
+            className="h-14 md:h-28 w-auto object-contain"
           />
         </div>
 

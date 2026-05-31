@@ -11,10 +11,12 @@ const Navbar = () => {
   const [offset, setOffset] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
+      if (isMenuOpen) return;
       const currentScrollY = window.scrollY;
       const navHeight = navRef.current?.offsetHeight || 80;
       const diff = lastScrollY - currentScrollY;
@@ -39,7 +41,7 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, isMenuOpen]);
 
   const handleStart = () => {
     window.location.reload();
@@ -48,30 +50,55 @@ const Navbar = () => {
   return (
     <nav 
       ref={navRef}
-      className={`fixed top-0 left-0 w-full z-50 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
+      className={`fixed top-0 left-0 w-full z-50 py-4 bg-transparent will-change-transform ease-out ${isScrollingUp ? 'transition-transform duration-1000' : ''}`}
       style={{ transform: `translateY(${offset}px)` }}
     >
-      <div className="w-full px-6 md:px-20 py-2 md:py-4 flex items-center justify-between">
+      <div className="w-full px-4 flex items-center justify-between relative h-20">
 
-        {/* Left: Icon Logo - Increased to match Wild West size */}
-        <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
-          <img 
-            src="logotrans.png" 
-            alt="Logo" 
-            className="h-48 md:h-80 w-auto object-contain"
-          />
-        </div>
-
-        {/* Right: Wild West Text Logo - Large size */}
-        <div className="cursor-pointer z-50 flex-shrink-0" onClick={handleStart}>
+        {/* Logo Container - Left */}
+        <div className="relative h-20 w-48 cursor-pointer z-50" onClick={handleStart}>
           <img 
             src="wildlogo.png" 
-            alt="Wild West" 
-            className="h-48 md:h-80 w-auto object-contain"
+            alt="Wild West Logo" 
+            className="absolute -top-20 -left-12 h-72 w-auto max-w-none object-contain pointer-events-none"
           />
         </div>
 
+        {/* Center: Centerpiece Logo */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-40" onClick={handleStart}>
+          <img 
+            src="logotrans.png" 
+            alt="Center Logo" 
+            className="h-24 w-auto object-contain"
+          />
+        </div>
+
+        {/* Right: Action Buttons */}
+        <div className="flex items-center gap-2 md:gap-6 z-50">
+          <button className="hidden md:flex font-mouse-memoirs hover:scale-105 transition-all duration-300 items-center justify-center text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[1.8vw] py-[.6vw] group rounded-full hover:bg-black shadow-lg">
+            <span className="relative z-10">Burrito</span>
+          </button>
+          <button className="hidden md:flex font-mouse-memoirs hover:scale-105 transition-all duration-300 items-center justify-center text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[1.8vw] py-[.6vw] group rounded-full hover:bg-black shadow-lg">
+            <span className="relative z-10">Rice Bowl</span>
+          </button>
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="font-mouse-memoirs hover:scale-105 transition-all duration-300 flex items-center justify-center text-[4.5vw] md:text-[1.5vw] uppercase tracking-wide text-beige bg-red px-[5.5vw] py-[1.8vw] md:px-[1.8vw] md:py-[.6vw] group rounded-full hover:bg-black shadow-lg"
+          >
+            <span className="relative z-10">{isMenuOpen ? 'Close' : 'Menu'}</span>
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-red z-40 flex flex-col items-center justify-center gap-8 pt-20">
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Burrito</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Rice Bowl</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Manifesto</button>
+          <button onClick={() => setIsMenuOpen(false)} className="text-beige text-6xl font-mouse-memoirs uppercase hover:scale-110 transition-transform">Origins</button>
+        </div>
+      )}
     </nav>
   );
 };
